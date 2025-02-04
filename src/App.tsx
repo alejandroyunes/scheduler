@@ -1,7 +1,7 @@
-import './app.css'
+import '../src/assets/app.css'
 
 import { Header } from './components/header'
-import { Scheduling } from './components/scheduler'
+import { Scheduler } from './components/scheduler'
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
       <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="p-6">
           <Header />
-          <Scheduling />
+          <Scheduler />
         </div>
       </div>
     </div>
