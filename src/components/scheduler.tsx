@@ -8,7 +8,9 @@ export const Scheduler = () => {
 
   const [users, setUsers] = useState<User[]>([
     { id: '1', name: 'Jose', phone: '222 2222', email: 'user@user.com', location: 'Bogota D.C.', color: 'hsl(200, 70%, 60%)' },
-    { id: '2', name: 'Maria', phone: '333 3333', email: 'Maria@user.com', location: 'Cali', color: 'hsl(150, 70%, 60%)' }
+    { id: '2', name: 'Maria', phone: '333 3333', email: 'Maria@user.com', location: 'Cali', color: 'hsl(150, 70%, 60%)' },
+    { id: '3', name: 'Pedro', phone: '444 4444', email: 'Pedro@user.com', location: 'Medellin', color: 'hsl(300, 70%, 60%)' },
+    { id: '4', name: 'Luis', phone: '555 5555', email: 'Luis@user.com', location: 'Bucaramanga', color: 'hsl(50, 70%, 60%)' },
   ])
 
   const [timeBlocks, setTimeBlocks] = useState<TimeBlock[]>([])
@@ -45,19 +47,19 @@ export const Scheduler = () => {
 
   const handleDeleteUser = (userId: string) => {
     // Delete all time blocks associated with this user
-    setTimeBlocks(timeBlocks.filter(block => block.userId !== userId));
+    setTimeBlocks(timeBlocks.filter(block => block.userId !== userId))
     // Delete the user
-    setUsers(users.filter(user => user.id !== userId));
+    setUsers(users.filter(user => user.id !== userId))
     // Reset editing state if we're deleting the user being edited
     if (editingUser?.id === userId) {
-      setEditingUser(null);
+      setEditingUser(null)
     }
   }
 
   const timeSlots = Array.from({ length: 24 }, (_, i) => ({
     hour: i,
     color: 'bg-green-100'
-  }));
+  }))
 
   const toggleFilter = (filter: string) => {
     setSelectedFilters(prev =>
@@ -68,7 +70,7 @@ export const Scheduler = () => {
   }
 
   const filteredUsers = users.filter(user => {
-    if (!searchTerm) return true;
+    if (!searchTerm) return true
 
     if (selectedFilters.length === 0) {
       return (
@@ -128,7 +130,7 @@ export const Scheduler = () => {
       block =>
         block.date === selectedDate &&
         block.hour === selectedHour
-    );
+    )
 
     if (blockExists) {
       setError('Ya existe un bloque de tiempo para esta hora');
@@ -142,18 +144,18 @@ export const Scheduler = () => {
       hour: selectedHour,
       userName: user.name,
       userColor: user.color
-    };
+    }
 
-    setTimeBlocks([...timeBlocks, newBlock]);
-    setSelectedHour(null);
+    setTimeBlocks([...timeBlocks, newBlock])
+    setSelectedHour(null)
   }
 
   const getTimeBlocksForDate = () => {
-    if (!selectedDate) return [];
-    return timeBlocks.filter(block => block.date === selectedDate);
+    if (!selectedDate) return []
+    return timeBlocks.filter(block => block.date === selectedDate)
   }
 
-  const currentTimeBlocks = getTimeBlocksForDate();
+  const currentTimeBlocks = getTimeBlocksForDate()
 
   // Get tomorrow's date in YYYY-MM-DD format for the date input min/max
   const tomorrow = new Date();
